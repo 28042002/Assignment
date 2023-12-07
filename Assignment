@@ -1,0 +1,49 @@
+Easy 1:
+def length_of_last_word(s):
+    words = s.split()
+    if len(words) == 0:
+        return 0 
+    last_word = words[-1]
+    return len(last_word)
+input_string = input()
+result = length_of_last_word(input_string)
+print( result)
+
+Medium 2:
+def majorityElement(nums):
+    count = 0
+    candidate = None
+    for num in nums:
+        if count == 0:
+            candidate = num
+        count += (1 if num == candidate else -1)
+
+    count = 0
+    for num in nums:
+        if num == candidate:
+            count += 1
+
+    if count > len(nums) // 2:
+        return [candidate]
+    else:
+        return []
+
+nums = list(map(int,input()))
+result = majorityElement(nums)
+print( result)
+
+Hard 3:
+def countDigitOne(n):
+    count = 0
+    multiplier = 1
+
+    while multiplier <= n:
+        divider = multiplier * 10
+        count += (n // divider) * multiplier + min(max(n % divider - multiplier + 1, 0), multiplier)
+        multiplier *= 10
+
+    return count
+
+n1 = int(input())
+print(countDigitOne(n1))
+
