@@ -53,15 +53,12 @@ print(majorityElement(nums))
 Hard 3:
 def countDigitOne(n):
     count = 0
-    multiplier = 1
-
-    while multiplier <= n:
-        divider = multiplier * 10
-        count += (n // divider) * multiplier + min(max(n % divider - multiplier + 1, 0), multiplier)
-        multiplier *= 10
-
+    position = 1
+    while position <= n:
+        divider = position * 10
+        count += (n // divider) * position + min(max(n % divider - position + 1, 0), position)
+        position *= 10
     return count
-
 n1 = int(input())
 print(countDigitOne(n1))
 
