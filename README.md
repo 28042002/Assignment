@@ -7,7 +7,7 @@ Algorithm:
 4. While traversing, ignore any trailing spaces.
 5. When encountering a non-space character, start counting the length of the word until a space or the start of the string is reached.
 6. Return the length of the last word found.
-
+```   
 Pseudocode:
 FUNCTION lengthOfLastWord(s):
     length = 0
@@ -80,8 +80,38 @@ def majorityElement(nums):
         result.append(candidate2)
 
     return result
-
-# Example
 nums = list(map(int,input())
 print("Output:", majorityElement(nums)) 
 ```
+Hard 3:
+This problem involves counting the occurrences of the digit 1 in all non-negative integers less than or equal to a given number `n`. You can solve this problem by considering the pattern of occurrences of the digit 1.
+
+The idea is to split the number into different ranges (ones, tens, hundreds, etc.) and count how many times the digit 1 appears in each range.
+
+Algorithm:
+1. Initialize a variable `count` to 0 to keep track of the total count of digit 1 occurrences.
+2. Iterate through each position from the least significant digit to the most significant digit.
+3. For each position `i`, split the number `n` into three parts: `left` (numbers to the left of the current position), `curr` (current digit), and `right` (numbers to the right of the current position).
+4. Calculate the contribution of the current position to the total count of digit 1 occurrences:
+   - For `curr == 0`, the digit 1 occurs `left * position` times.
+   - For `curr == 1`, the digit 1 occurs `left * position + right + 1` times.
+   - For `curr > 1`, the digit 1 occurs `(left + 1) * position` times.
+5. Update the `count` by adding the contribution from each position.
+6. Return the final `count` as the total number of occurrences of the digit 1.
+
+Here's the Python code implementing this algorithm:
+
+```python
+def countDigitOne(n):
+    count = 0
+    position = 1
+    while position <= n:
+        divider = position * 10
+        count += (n // divider) * position + min(max(n % divider - position + 1, 0), position)
+        position *= 10
+    return count
+n=int(input())
+print( countDigitOne(n)) 
+```
+
+This code defines a function `countDigitOne` that calculates the total count of digit 1 occurrences in non-negative integers up to the given number `n`. For the input `n = 13`, the output is `6`, and for `n = 0`, the output is `0`, which matches the expected results.
